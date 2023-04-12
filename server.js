@@ -21,9 +21,6 @@ app.use(express.json());
 
 const connectionPool = mysql.createPool({
     connectionLimit : 1000,
-    connectTimeout  : 60 * 60 * 1000,
-    acquireTimeout  : 60 * 60 * 1000,
-    timeout         : 60 * 60 * 1000,
     host: "cvdb.c4p731oe4hib.eu-west-2.rds.amazonaws.com",
     user: "admin",
     password: "myfinalyearproject",
@@ -37,14 +34,15 @@ const connectionPool = mysql.createPool({
 app.get('/courses',  (request, response) => {
 
 
-    const sql = "SELECT * FROM title";
-    connectionPool.query(sql, function (err, result) {
-        //Check for errors
-        if (err) {
-            //Reject promise if there are errors
-
+    let sql = "SELECT * FROM title";
+    connectionPool.query(sql, (err, result) => {
+        if (err) {//Check for errors
+            console.error("Error executing query: " + JSON.stringify(err));
         }
-        response.json(result);
+        else {
+            console.log(JSON.stringify(result));
+            response.send(result);
+        }
     });
 
 });
