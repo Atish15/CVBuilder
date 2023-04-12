@@ -8,7 +8,8 @@ const connectionPool = mysql.createPool({
     user: "admin",
     password: "myfinalyearproject",
     database: "final_project",
-    debug: false
+    debug: false,
+    acquireTimeout:6000,
 });
 
 
