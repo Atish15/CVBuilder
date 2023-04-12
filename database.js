@@ -3,13 +3,16 @@ const mysql = require('mysql');
 
 //Create a connection object with the user details
 const connectionPool = mysql.createPool({
-    connectionLimit: 1,
+    connectionLimit : 1000,
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000,
     host: "cvdb.c4p731oe4hib.eu-west-2.rds.amazonaws.com",
     user: "admin",
     password: "myfinalyearproject",
     database: "final_project",
     debug: false,
-    acquireTimeout:6000,
+
 });
 
 
